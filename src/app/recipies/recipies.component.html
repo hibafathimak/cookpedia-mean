@@ -1,1 +1,59 @@
-<p>recipies works!</p>
+<app-header/>
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="container">
+                <h4>Filter</h4>
+                <button class="btn mt-5">All</button>
+                <br>
+                <button class="btn btn-danger dropdown-toggle mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Cusine Type
+                </button>
+                <div class="collapse mt-1" id="collapseExample">
+                    @for (item of allCuisine; track $index) {
+                        <button class="btn btn-outline-danger m-1" type="button" >
+                            {{item}}
+                        </button>
+                    }
+                  </div>
+                  <br>
+                  <button class="btn btn-danger dropdown-toggle mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
+                    Meal Type
+                </button>
+                <div class="collapse mt-1" id="collapseExample2">
+                    @for (item of mealTypes; track $index) {
+                        <button class="btn btn-outline-danger m-1" type="button" >
+                            {{item}}
+                        </button>
+                    }
+                  </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1>All Recipies</h1>
+                <input type="text" class="form-control w-50" placeholder="Search Recipie Name">
+            </div>
+            <div class="row my-3">
+               @if(allRecipes.length>0){
+                @for (item of allRecipes; track $index) {
+                    <div class="col-lg-4">
+                        <div class="p-5">
+                            <img [src]="item.image" alt="" class="card-img-top rounded">
+                        </div>
+                        <div class="card-body text-center">
+                            <h5>{{item.name}}</h5>
+                            <p>{{item.cuisine}}</p>
+                        </div>
+                    </div>
+                }
+               }@else {
+                <div class="fw-bolder fs-5 my-5 text-danger">
+                    Recipe not Found !!!
+                </div>
+               }
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer/>
