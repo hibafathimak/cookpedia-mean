@@ -1,1 +1,32 @@
-<p>register works!</p>
+<div>
+    <div style="height: 100vh;" class="row w-100 align-items-center">
+        <div class="col-lg-2"></div>
+        <form [formGroup]="registerForm" (ngSubmit)="register()" class="col-lg-4 shadow rounded w-40 p-5 d-flex flex-column justify-content-center align-items-center">
+            <h1 class=" ms-2 text-danger fw-bolder " >
+                <i class="fa-solid fa-utensils me-3"></i>
+                CookPedia
+              </h1>
+              <input name="name" formControlName="username" type="text" class="form-control my-3  shadow-none" placeholder="Username">
+              @if(registerForm.get("username")?.errors && registerForm.get("username")?.touched){<div class="text-secondary fw-bolder">Invalid Username</div>}
+              <input name="email" formControlName="email" type="text" class="form-control my-3  shadow-none" placeholder="Email">
+              @if(registerForm.get("email")?.errors && registerForm.get("email")?.touched){<div class="text-secondary fw-bolder">Invalid Email</div>}
+              <input name="password" formControlName="password" type="password" class="form-control my-3 shadow-none" placeholder="Password">
+              @if(registerForm.get("password")?.errors && registerForm.get("password")?.touched){<div class="text-secondary fw-bolder">Invalid Password</div>}
+    
+              <button type="submit" class="btn btn-outline-danger my-2">Register</button>
+        </form>
+        <div class="col-lg-1"></div>
+        <div class="col-lg-4">
+            <h1>Create New Account</h1>
+            <h5>What you will get?</h5>
+            <ul>
+                <li>Different Recipes</li>
+                <li>Easy way to share your Recipe</li>
+                <li>Save your favorite Recipe</li>
+                <li>Download your Recipe</li>
+            </ul>
+        </div>
+    </div>
+    <app-footer/>
+    
+</div>

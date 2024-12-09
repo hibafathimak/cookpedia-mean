@@ -1,1 +1,16 @@
-<p>login works!</p>
+<div style="height: 100vh;" class="w-100 d-flex flex-column justify-content-center align-items-center">
+<h1 class="fw-bolder">Login</h1>
+<p>More than 100 plus Recipies from all around the World</p>
+<form [formGroup]="loginForm" (ngSubmit)="login()" class="shadow rounded w-40 p-5 d-flex flex-column justify-content-center align-items-center">
+    <h1 class=" ms-2 text-danger fw-bolder " >
+        <i class="fa-solid fa-utensils me-3"></i>
+        CookPedia
+      </h1>
+      <input name="name" formControlName="email" type="text" class="form-control my-3  shadow-none" placeholder="Email">
+      @if(loginForm.get("email")?.errors && loginForm.get("email")?.touched){<div class="text-secondary fw-bolder">Invalid Email</div>}
+      <input name="password" formControlName="password" type="password" class="form-control my-3 shadow-none" placeholder="Password">
+      @if(loginForm.get("password")?.errors && loginForm.get("password")?.touched){<div class="text-secondary fw-bolder">Invalid Password</div>}
+      <button type="submit" class="btn btn-outline-danger my-2">Login</button>
+</form>
+</div>
+<app-footer/>

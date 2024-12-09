@@ -4,14 +4,14 @@
         <div class="col-lg-4">
             <div class="container">
                 <h4>Filter</h4>
-                <button class="btn mt-5">All</button>
+                <button (click)="getallReipes()" class="btn mt-5">All</button>
                 <br>
                 <button class="btn btn-danger dropdown-toggle mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                     Cusine Type
                 </button>
                 <div class="collapse mt-1" id="collapseExample">
                     @for (item of allCuisine; track $index) {
-                        <button class="btn btn-outline-danger m-1" type="button" >
+                        <button (click)="filterAllRecipes('cuisine',item)" class="btn btn-outline-danger m-1" type="button" >
                             {{item}}
                         </button>
                     }
@@ -22,7 +22,7 @@
                 </button>
                 <div class="collapse mt-1" id="collapseExample2">
                     @for (item of mealTypes; track $index) {
-                        <button class="btn btn-outline-danger m-1" type="button" >
+                        <button (click)="filterAllRecipes('mealType',item)"  class="btn btn-outline-danger m-1" type="button" >
                             {{item}}
                         </button>
                     }
@@ -32,13 +32,13 @@
         <div class="col-lg-8">
             <div class="d-flex justify-content-between align-items-center">
                 <h1>All Recipies</h1>
-                <input type="text" class="form-control w-50" placeholder="Search Recipie Name">
+                <input type="text" class="form-control w-50 shadow-none" [(ngModel)]="searchKey"  placeholder="Search Recipie Name">
             </div>
             <div class="row my-3">
                @if(allRecipes.length>0){
-                @for (item of allRecipes; track $index) {
+                @for (item of allRecipes | search : searchKey | paginate: { itemsPerPage: 9, currentPage: p }; track $index) {
                     <div class="col-lg-4">
-                        <div class="p-5">
+                        <div style="cursor: pointer;" (click)="viewRecipe(item._id)" class="p-2">
                             <img [src]="item.image" alt="" class="card-img-top rounded">
                         </div>
                         <div class="card-body text-center">
@@ -47,12 +47,21 @@
                         </div>
                     </div>
                 }
+                @if((allRecipes | search : searchKey ).length==0){
+                    <div class="fw-bolder fs-5 my-5 text-danger">
+                        Recipe not Found !!!
+                    </div>
+                }
                }@else {
                 <div class="fw-bolder fs-5 my-5 text-danger">
                     Recipe not Found !!!
                 </div>
                }
             </div>
+<div class="text-center p-5">
+                <pagination-controls class="my-pagination" (pageChange)="p = $event"></pagination-controls>
+    
+</div>
         </div>
     </div>
 </div>
