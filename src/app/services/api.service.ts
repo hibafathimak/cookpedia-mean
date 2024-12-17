@@ -39,4 +39,40 @@ export class ApiService {
   saveRecipeApi(RecipeId:string,reqBody:any){
     return this.http.post(`${this.serverUrl}/recipe/${RecipeId}/save`,reqBody,this.appendToken())
   }
+  getSavedRecipeApi(){
+    return this.http.get(`${this.serverUrl}/saved-recipe`,this.appendToken())
+  }
+  deleteRecipeApi(recipeId:string){
+    return this.http.delete(`${this.serverUrl}/saved-recipe/${recipeId}/delete`,this.appendToken())
+  }
+  getUserDownloadListApi(){
+    return this.http.get(`${this.serverUrl}/download-recipes`,this.appendToken())
+  }
+  editUserApi(reqBody:any){
+    return this.http.post(`${this.serverUrl}/user-edit`,reqBody,this.appendToken())
+  }
+  getAllUsersApi(){
+    return this.http.get(`${this.serverUrl}/all-users`,this.appendToken())
+  }
+  getAllDownloadsApi(){
+    return this.http.get(`${this.serverUrl}/all-downloads`,this.appendToken())
+  }
+  getAllTestimonyApi(){
+    return this.http.get(`${this.serverUrl}/all-testimony`,this.appendToken())
+  }
+  updateFeedbackApi(feedbackId:string,status:string){
+    return this.http.get(`${this.serverUrl}/testimony/${feedbackId}/update?status=${status}`,this.appendToken())
+  }
+  getApprovedFeedbackApi(){
+    return this.http.get(`${this.serverUrl}/feedbacks`)
+  }
+  addrecipeApi(reqBody:any){
+    return this.http.post(`${this.serverUrl}/add-recipe`,reqBody,this.appendToken())
+  }
+  editRecipeApi(reqBody:any,id:string){
+    return this.http.put(`${this.serverUrl}/edit-recipe/${id}`,reqBody,this.appendToken()) 
+  }
+  deleteAdminRecipeApi(id:string){
+    return this.http.delete(`${this.serverUrl}/delete-recipe/${id}`,this.appendToken()) 
+  }
 }

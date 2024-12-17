@@ -1,0 +1,47 @@
+<div class="row w-100">
+    <div class="col-lg-2">
+        <app-sidebar />
+    </div>
+    <div class="col-lg-10">
+        <h1 class="mt-4 fw-bolder">Download List</h1>
+
+        <table class="table my-5 shadow rounded">
+            <thead class="table-light">
+                <tr>
+                    <th>#</th>
+                    <th>User Name</th>
+                    <th>Email</th>
+                    <th>Message</th>
+                    <th>Action/Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (item of allRequests; track $index; let i =$index) {
+                <tr>
+                    <td>{{i+1}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.email}}</td>
+                    <td>{{item.message}}</td>
+                    <td>
+                        @if(item.status=="Pending"){
+                          <div class="d-flex">
+                                <button (click)="updateTesimony(item._id,'Approved')" class="btn btn-light border me-1">
+                                    <i class="fa-solid fa-check"></i>
+                                </button>
+                                <button (click)="updateTesimony(item._id,'Rejected')" class="btn btn-dark  ms-1">
+                                    <i class="fa-solid fa-xmark"></i>                                
+                                </button>
+                          </div>
+                        }@else if (item.status=="Approved") {
+                            <p class="badge bg-light text-success p-2 rounded border">Approved</p>
+                        }@else {
+                            <p class="badge bg-light text-danger p-2 rounded border">Rejected</p>
+                        }
+                    </td>
+                </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

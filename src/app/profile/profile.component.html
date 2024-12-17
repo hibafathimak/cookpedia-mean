@@ -1,1 +1,33 @@
-<p>profile works!</p>
+<app-header/>
+
+<div class="container my-5  d-flex flex-column justify-content-center align-items-center ">
+
+    <div style="width: fit-content;" class="my-5 d-flex flex-column justify-content-center align-items-center shadow rounded p-5">
+        <h1>My Profile</h1>
+        <label>
+            <input (change)="getFile($event)" type="file" style="display: none;">
+            <img  [src]="profileImg" width="150px" height="150px" alt="">
+        </label>
+        <br>
+        <button (click)="updateProfile()" class="btn btn-outline-danger m-3">Update Profile</button>
+    </div>
+
+    <h3>Download Recipes List</h3>
+    <div class="row my-5">
+        @if(userDownloadList.length>0)
+        {@for (item of userDownloadList; track $index) {
+         <div class="col-lg-4 ">
+             <div style="cursor: pointer;" routerLink="/recipie/{{item.recipeId}}/view" class="p-4">
+                 <img [src]="item.recipeImage" alt=""  class="card-img-top rounded">
+             </div>
+             <div  class="card-body d-flex justify-content-between align-items-center px-5">
+                 <h5 class="text-center">{{item.recipeName}}</h5>
+             </div>
+         </div>
+        }}@else {
+            <div class="text-center text-secondary fw-semibold">No Recipes Downloaded Yet...</div>
+        }
+    </div>
+</div>
+
+<app-footer/>

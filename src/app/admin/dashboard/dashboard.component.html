@@ -1,0 +1,80 @@
+<div class="row w-100 m-0" style="height: fit-content;">
+    @if(isSideBarOpen){ <div class="col-lg-2 bg-danger">
+        <app-sidebar />
+    </div>}
+
+    <div [class]="columnWidth">
+        <div class="bg-dark w-100 p-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2 class=" text-light fw-bolder">
+                    <i style="cursor: pointer;" (click)="menuBtnClick()" class="fa-solid fa-bars me-3"></i>
+                    Admin Dashboard
+                </h2>
+                <div class="dropdown">
+                    <button class="btn text-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="fa-solid fa-user-large me-2"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <button (click)="logout()" class="dropdown-item text-danger" type="button">
+                                Logout <i class="fa-solid fa-right-from-bracket ms-2"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-evenly align-items-center my-5">
+            <!-- Users Card -->
+            <div class="d-flex align-items-center p-4 rounded text-dark shadow-sm border" style="min-width: 250px;">
+                <i class="fa-solid fa-users fa-3x me-3"></i>
+                <div>
+                    <h4 class="mb-1">Users</h4>
+                    <h5 class="m-0">{{userCount}}</h5>
+                </div>
+            </div>
+
+            <!-- Recipes Card -->
+            <div class="d-flex align-items-center p-4 rounded text-dark shadow-sm border" style="min-width: 250px;">
+                <i class="fa-solid fa-bowl-food fa-3x me-3"></i>
+                <div>
+                    <h4 class="mb-1">Recipes</h4>
+                    <h5 class="m-0">{{recipeCount}}</h5>
+                </div>
+            </div>
+
+            <!-- Downloads Card -->
+            <div class="d-flex align-items-center p-4 rounded text-dark shadow-sm border" style="min-width: 250px;">
+                <i class="fa-solid fa-download fa-3x me-3"></i>
+                <div>
+                    <h4 class="mb-1">Downloads</h4>
+                    <h5 class="m-0">{{downloadCount}}</h5>
+                </div>
+            </div>
+
+            <!-- Notifications Card -->
+            <div class="d-flex align-items-center p-4 rounded text-dark shadow-sm border" style="min-width: 250px;">
+                <i class="fa-solid fa-message fa-3x me-3"></i>
+                <div>
+                    <h4 class="mb-1">Notifications</h4>
+                    <h5 class="m-0">
+                        You Have <a routerLink="/admin/request-list"
+                            class="text-decoration-underline">{{requestCount}}</a> New Requests
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <div class="row w-100">
+            <div class="col-lg-8">
+                <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"
+                    style="width: 100%; height: 400px; display: block;"></highcharts-chart>
+            </div>
+            <div class="col-lg-4">
+                <mat-card class="demo-inline-calendar-card w-75">
+                    <mat-calendar [(selected)]="selected"></mat-calendar>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

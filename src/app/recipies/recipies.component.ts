@@ -29,23 +29,38 @@ export class RecipiesComponent {
     this.getallReipes()
   }
 
-  getallReipes(){
-    this.api.getAllRecipes().subscribe((res:any)=>{
-      this.allRecipes = res
-      this.dummyAllRecipies=this.allRecipes
+  getallReipes() {
+    this.api.getAllRecipes().subscribe((res: any) => {
+      this.allRecipes = res;
+      this.allRecipes = this.shuffleArray(this.allRecipes);
+      this.dummyAllRecipies = this.allRecipes;
       console.log(this.allRecipes);
-      this.allRecipes.forEach((item:any) => {
-        !this.allCuisine.includes(item.cuisine) && this.allCuisine.push(item.cuisine)
+  
+      this.allRecipes.forEach((item: any) => {
+        if (!this.allCuisine.includes(item.cuisine)) {
+          this.allCuisine.push(item.cuisine);
+        }
       });
-      
-        const dummyarray =this.allRecipes.flatMap((item:any) => item.mealType)
-        dummyarray.forEach((item:any) => {
-          !this.mealTypes.includes(item) && this.mealTypes.push(item)
-        });
-        
-        console.log();   
-    })
+  
+      const dummyArray = this.allRecipes.flatMap((item: any) => item.mealType);
+      dummyArray.forEach((item: any) => {
+        if (!this.mealTypes.includes(item)) {
+          this.mealTypes.push(item);
+        }
+      });
+  
+      console.log(this.mealTypes);
+    });
   }
+  
+  shuffleArray(array: any[]) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+  
 
   filterAllRecipes(key:string,value:string){
     this.allRecipes=this.dummyAllRecipies.filter((item:any)=>item[key].includes(value))

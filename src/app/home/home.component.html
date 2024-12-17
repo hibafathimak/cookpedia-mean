@@ -54,12 +54,16 @@
     <div class="text-center my-5">
         <h1>Client Testimonials</h1>
         <marquee>
-            <div class="d-flex my-5">
-                <div class="rounded border shadow p-3 me-2">
-                    <h5>name</h5>
-                    <p style="white-space: normal;width: 300px;text-align: justify;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat, veniam reprehenderit sit incidunt odit est sequi pariatur laborum eos praesentium vel facere officiis dolorum earum asperiores minus adipisci laudantium at.</p>
+            <div class="d-flex  my-5">
+
+           @for (item of feedbacks; track $index)  {
+                <div class="rounded border shadow p-3 mx-4">
+                    <h5>{{item.name}}</h5>
+                    <p style="white-space: normal;width: 300px;text-align: justify;">{{item.message}}</p>
                 </div>
-            </div>
+        }
+    </div>
+
         </marquee>
     </div>
 </div>

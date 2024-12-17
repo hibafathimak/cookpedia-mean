@@ -74,7 +74,7 @@ export class ViewRecipieComponent {
     pdf.text(`Total Calorie Per Servings : ${this.recipe.caloriesPerServing}`,10,70)
     let head =[['Ingredients','Cooking Instructions']]
     let body =[]
-    body.push(this.recipe.ingredients,this.recipe.instructions)
+    body.push([this.recipe.ingredients,this.recipe.instructions])
     autoTable(pdf,{head,body,margin:{top: 80, right: 10, bottom: 0, left: 10}})
     pdf.output('dataurlnewwindow')
     pdf.save('download-recipe.pdf')
