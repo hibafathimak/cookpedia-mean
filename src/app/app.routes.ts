@@ -9,10 +9,11 @@ import { RecipiesComponent } from './recipies/recipies.component';
 import { SavedRecipiesComponent } from './saved-recipies/saved-recipies.component';
 import { ViewRecipieComponent } from './view-recipie/view-recipie.component';
 import { PnfComponent } from './pnf/pnf.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     {
-        path:'admin',loadChildren:()=>import('./admin/admin.module').then(m=>m.AdminModule)
+        path:'admin',canActivate:[authGuard],loadChildren:()=>import('./admin/admin.module').then(m=>m.AdminModule)
     },
     {
         path: "", component: HomeComponent,title:"Home Page"
@@ -30,16 +31,16 @@ export const routes: Routes = [
         path: "register", component: RegisterComponent,title:"Register"
     },
     {
-        path: "profile", component: ProfileComponent,title:"Profile Page"
+        path: "profile",canActivate:[authGuard], component: ProfileComponent,title:"Profile Page"
     },
     {
         path: "all-recipies", component: RecipiesComponent,title:"All Recipies"
     },
     {
-        path: "save-recipies", component: SavedRecipiesComponent,title:"Saved Recipies Collection"
+        path: "save-recipies",canActivate:[authGuard], component: SavedRecipiesComponent,title:"Saved Recipies Collection"
     },
     {
-        path: "recipie/:id/view", component: ViewRecipieComponent,title:"View Recipe"
+        path: "recipie/:id/view",canActivate:[authGuard], component: ViewRecipieComponent,title:"View Recipe"
     },
     {
         path: "**", component: PnfComponent,title:"Page Not Found"

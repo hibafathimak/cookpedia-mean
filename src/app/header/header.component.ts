@@ -25,6 +25,7 @@ ngOnInit(){
 }
 logout(){
   sessionStorage.clear()
+  localStorage.clear()
   this.isloggedin=false
     this.loggedUsername=""
     this.router.navigateByUrl('/')

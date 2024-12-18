@@ -5,7 +5,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ApiService {
-  serverUrl:string = "http://localhost:3000"
+  // serverUrl:string = "http://localhost:3000"
+  serverUrl:string = "https://cookpediaserver-1.onrender.com"
+
   constructor(private http:HttpClient) { }
   getAllRecipes(){
     return this.http.get(`${this.serverUrl}/all-recipies`)
@@ -74,5 +76,27 @@ export class ApiService {
   }
   deleteAdminRecipeApi(id:string){
     return this.http.delete(`${this.serverUrl}/delete-recipe/${id}`,this.appendToken()) 
+  }
+
+  getChartData(){
+    this.getAllDownloadsApi().subscribe((res:any)=>{
+      let downloadArrayList:any=[]
+      let output:any={}
+      res.forEach((item:any) => {
+        let cuisine = item.recipeCuisine
+        let currentCount =item.count
+        if(output.hasOwnProperty(cuisine)){
+          output[cuisine]+=currentCount
+        }else{
+          output[cuisine]=currentCount
+        }
+      });
+      console.log(output);
+      for(let cuisine in output){
+        downloadArrayList.push({name:cuisine,y:output[cuisine]})
+      }
+      console.log(downloadArrayList);
+      localStorage.setItem("chart",JSON.stringify(downloadArrayList))
+    })
   }
 }
